@@ -9,14 +9,14 @@
     "tsc-paths": "cjs/index.js"
   },
   "scripts": {
-    "build": "npm build:esm && npm build:cjs",
+    "build": "npm run build:esm && npm run build:cjs",
     "build:esm": "tsc -p ./tsconfig.esm.json",
     "build:cjs": "tsc -p ./tsconfig.cjs.json",
     "clear": "rm -rf ./lib ./cjs ./coverage",
     "format": "prettier --write \"./*.{js,jsx,ts,tsx}\" \"./src/**/*.{js,jsx,ts,tsx}\"",
     "lint": "tslint -c ./tslint.json \"src/**/*\"",
     "lint:fix": "tslint --fix -c ./tslint.json \"src/**/*\"",
-    "start": "npm clear && npm format && npm lint:fix && npm test && npm build",
+    "start": "npm run clear && npm run format && npm run lint:fix && npm run test && npm run build",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch"
