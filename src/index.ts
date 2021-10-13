@@ -1,9 +1,7 @@
 #! /usr/bin/env node
-
-// tslint:disable no-console
-import * as program from 'commander';
+import { program } from 'commander';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
-import { sync } from 'globby';
+import { globbySync, Options } from 'globby';
 import { dirname, relative, resolve } from 'path';
 import { loadConfig } from './util';
 
@@ -15,9 +13,7 @@ program
   .option('-v, --verbose', 'output logs');
 
 program.on('--help', () => {
-  console.log(`
-  $ tscpath -p tsconfig.json
-`);
+  console.log('\n$ tsc-path -p tsconfig.json\n');
 });
 
 program.parse(process.argv);
@@ -49,7 +45,7 @@ const srcRoot = resolve(src);
 const outRoot = out && resolve(out);
 
 console.log(
-  `tscpaths --project ${configFile} --src ${srcRoot} --out ${outRoot}`
+  `tsc-paths --project ${configFile} --src ${srcRoot} --out ${outRoot}`
 );
 
 const { baseUrl, outDir, paths } = loadConfig(configFile);
@@ -79,7 +75,7 @@ const outFileToSrcFile = (x: string): string =>
   resolve(srcRoot, relative(outPath, x));
 
 const aliases = Object.keys(paths)
-  .map((alias) => ({
+  .map((alias: string) => ({
     prefix: alias.replace(/\*$/, ''),
     aliasPaths: paths[alias as keyof typeof paths].map((p) =>
       resolve(basePath, p.replace(/\*$/, ''))
@@ -159,16 +155,14 @@ const replaceAlias = (text: string, outFile: string): string =>
     );
 
 // import relative to absolute path
-const files = sync(`${outPath}/**/*.{js,jsx,ts,tsx}`, {
+const files = globbySync(`${outPath}/**/*.{js,jsx,ts,tsx}`, <Options>{
   dot: true,
   noDir: true,
-} as any).map((x) => resolve(x));
+}).map((x) => resolve(x));
 
 let changedFileCount = 0;
 
-const flen = files.length;
-for (let i = 0; i < flen; i += 1) {
-  const file = files[i];
+for (const file of files) {
   const text = readFileSync(file, 'utf8');
   const prevReplaceCount = replaceCount;
   const newText = replaceAlias(text, file);
