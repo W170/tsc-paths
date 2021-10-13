@@ -35,7 +35,7 @@
     "tsc"
   ],
   "author": "Wilmer H Muñoz <wmunoz@talenta.cloud>",
-  "license": "Apache License 2.0",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/W170/tsc-paths/issues"
   },
