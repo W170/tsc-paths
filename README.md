@@ -1,16 +1,16 @@
 # tsc-paths
 Replace absolute paths to relative paths after typescript compilation (tsc) during compile-time.
 
-[![npm version](https://badge.fury.io/js/tsc-paths.svg)](https://badge.fury.io/js/tsc-paths)
+[![npm version](https://badge.fury.io/js/tsc-paths-resolver.svg)](https://badge.fury.io/js/tsc-paths-resolver)
 
 
 ## Getting Started
 First, install tsc-paths as devDependency using npm or yarn.
 
 ```sh
-npm i -D tsc-paths
+npm i -D tsc-paths-resolver
 # or
-yarn add -D tsc-paths
+yarn add -D tsc-paths-resolver
 ```
 
 ## Add it to your build scripts in package.json
