@@ -1,46 +1,32 @@
 {
   "extends": [
-    "tslint:recommended",
-    "tslint-config-prettier",
-    "tslint-config-airbnb"
+    "tslint:recommended"
   ],
   "rules": {
-    "align": false,
-    "array-type": [true, "array-simple"],
-    "import-name": false,
-    "no-boolean-literal-compare": false,
-    "no-empty-interface": false,
-    "no-inferrable-types": true,
-    "no-this-assignment": [true, { "allow-destructuring": true }],
-    "object-literal-sort-keys": false,
-    "object-shorthand-properties-first": false,
-    "prefer-array-literal": false,
-    "semicolon": [true, "always", "ignore-bound-class-methods"],
-    "ter-arrow-parens": [true, "always"],
-    "ter-func-call-spacing": false,
-    "ter-indent": false,
-    "trailing-comma": [
+    "max-line-length": [true, { "limit": 120 }],
+    "new-parens": true,
+    "no-arg": true,
+    "no-bitwise": false,
+    "no-conditional-assignment": true,
+    "no-consecutive-blank-lines": false,
+    "no-console": {
+      "severity": "warning",
+      "options": ["debug", "info", "log", "time", "timeEnd", "trace"]
+    },
+    "forin": false,
+    "trailing-comma": false,
+    "prefer-for-of": true,
+    "no-empty": false,
+    "no-angle-bracket-type-assertion": false,
+    "no-unused-expression": true,
+    "no-namespace": false,
+    "ban-types": [
       true,
-      {
-        "multiline": {
-          "arrays": "always",
-          "objects": "always",
-          "functions": "never",
-          "imports": "always",
-          "exports": "always",
-          "typeLiterals": "always"
-        },
-        "singleline": "never",
-        "esSpecCompliant": true
-      }
-    ],
-    "typedef": [true, "call-signature", "arrow-call-signature"],
-    "variable-name": [
-      true,
-      "ban-keywords",
-      "check-format",
-      "allow-leading-underscore",
-      "allow-pascal-case"
+      ["String", "Use `string` instead"],
+      ["Boolean", "Use `boolean` instead"],
+      ["Number", "Use `number` instead"],
+      ["Symbol", "Use `symbol` instead"],
+      ["Object", "Avoid using the `Object` type. Did you mean `object`?"]
     ]
   },
   "jsRules": {}
