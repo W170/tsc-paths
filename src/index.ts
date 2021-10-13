@@ -1,12 +1,12 @@
 #! /usr/bin/env node
 import { program } from 'commander';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
-import { globbySync, Options } from 'globby';
+import { sync } from 'globby';
 import { dirname, relative, resolve } from 'path';
 import { loadConfig } from './util';
 
 program
-  .version('0.0.1')
+  .version('0.1.2')
   .option('-p, --project <file>', 'path to tsconfig.json')
   .option('-s, --src <path>', 'source root path')
   .option('-o, --out <path>', 'output root path')
@@ -155,10 +155,10 @@ const replaceAlias = (text: string, outFile: string): string =>
     );
 
 // import relative to absolute path
-const files = globbySync(`${outPath}/**/*.{js,jsx,ts,tsx}`, <Options>{
+const files = sync(`${outPath}/**/*.{js,jsx,ts,tsx}`, {
   dot: true,
   noDir: true,
-}).map((x) => resolve(x));
+} as any).map((x) => resolve(x.path));
 
 let changedFileCount = 0;
 
