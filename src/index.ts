@@ -6,8 +6,8 @@ import { dirname, relative, resolve } from 'path';
 import { loadConfig } from './util';
 
 program
-  .version('0.1.2')
-  .option('-p, --project <file>', 'path to tsconfig.json')
+  .version('0.1.3')
+  .option('-p, --project <file>', 'path to tsconfig.json', 'tsconfig.json')
   .option('-s, --src <path>', 'source root path')
   .option('-o, --out <path>', 'output root path')
   .option('-v, --verbose', 'output logs');
@@ -18,12 +18,10 @@ program.on('--help', () => {
 
 program.parse(process.argv);
 
-const { project, src, out, verbose } = program as {
-  project?: string;
-  src?: string;
-  out?: string;
-  verbose?: boolean;
-};
+const project: string = program.getOptionValue('project');
+const src: string = program.getOptionValue('src');
+const out: string = program.getOptionValue('out');
+const verbose: boolean = program.getOptionValue('verbose');
 
 if (!project) {
   throw new Error('--project must be specified');
@@ -158,7 +156,7 @@ const replaceAlias = (text: string, outFile: string): string =>
 const files = sync(`${outPath}/**/*.{js,jsx,ts,tsx}`, {
   dot: true,
   noDir: true,
-} as any).map((x) => resolve(x.path));
+} as any).map((x) => resolve(`${x}`));
 
 let changedFileCount = 0;
 
